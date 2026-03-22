@@ -102,19 +102,22 @@ export const CardWrapper = styled.div`
     }
 
     .post-content-block {
-      height: 10rem;
+      height: auto;
+      min-height: 10rem;
     }
   }
 
   @media screen and (max-width: 670px) and (min-width: 560px) {
     .post-content-block {
-      height: 10rem;
+      height: auto;
+      min-height: 10rem;
     }
   }
 
   @media screen and (max-width: 350px) {
     .post-content-block {
-      height: 10rem;
+      height: auto;
+      min-height: 10rem;
     }
   }
 
@@ -123,10 +126,10 @@ export const CardWrapper = styled.div`
     font-weight: 400;
     margin: 0 -1rem 0.5rem -1rem;
     padding: 0 1rem;
+    white-space: normal !important;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
