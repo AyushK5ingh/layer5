@@ -1,3 +1,6 @@
+// majority of code from https://www.joshwcomeau.com/react/dark-mode/ and https://github.com/gperl27/gatsby-styled-components-dark-mode
+// context provider for app to make accessible theme setting, toggle function, etc.
+
 import React, { createContext, useState, useEffect, useCallback } from "react";
 
 export const ThemeSetting = {
@@ -18,6 +21,7 @@ const defaultState = {
 
 export const ThemeManagerContext = createContext(defaultState);
 
+// Safe check for browser environment
 const isBrowser = typeof window !== "undefined";
 
 const systemDarkModeSetting = () =>
@@ -32,6 +36,8 @@ const applyThemeToDOM = (theme) => {
   const root = window.document.documentElement;
   root.style.setProperty("--initial-color-mode", theme);
   root.setAttribute("data-theme", theme);
+  
+  // Sync with SSR injected state
   window.__theme = theme;
 };
 
@@ -39,6 +45,7 @@ export const ThemeManagerProvider = (props) => {
   const [themeSetting, setThemeSetting] = useState(ThemeSetting.SYSTEM);
   const [didLoad, setDidLoad] = useState(false);
   
+  // Initialize state from SSR script to prevent hydration mismatch
   const [isDark, setIsDark] = useState(() => {
     if (isBrowser) {
       if (window.__theme === ThemeSetting.DARK) return true;
@@ -52,8 +59,11 @@ export const ThemeManagerProvider = (props) => {
 
     const root = window.document.documentElement;
     const initialColorValue = (root.style.getPropertyValue("--initial-color-mode") || "").trim();
+    
+    // Prioritize SSR-injected theme
     const actualTheme = window.__theme || initialColorValue || ThemeSetting.LIGHT;
 
+    // Get stored theme from localStorage
     const storedTheme = localStorage.getItem(DarkThemeKey);
 
     if (storedTheme && storedTheme !== ThemeSetting.SYSTEM) {
@@ -65,6 +75,7 @@ export const ThemeManagerProvider = (props) => {
       setIsDark(actualTheme === ThemeSetting.DARK);
       setThemeSetting(ThemeSetting.SYSTEM);
     } else {
+      // Fallback to system preference
       const systemIsDark = isDarkModeActive();
       setIsDark(systemIsDark);
       const theme = systemIsDark ? ThemeSetting.DARK : ThemeSetting.LIGHT;
@@ -74,6 +85,7 @@ export const ThemeManagerProvider = (props) => {
     setDidLoad(true);
   }, []);
 
+  // Listen to system color scheme changes only when on SYSTEM mode
   useEffect(() => {
     if (!isBrowser || themeSetting !== ThemeSetting.SYSTEM) return;
 
@@ -95,11 +107,14 @@ export const ThemeManagerProvider = (props) => {
     const newIsDark = !isDark;
     const newTheme = newIsDark ? ThemeSetting.DARK : ThemeSetting.LIGHT;
 
+    // Update state
     setIsDark(newIsDark);
     setThemeSetting(newTheme);
 
+    // Apply to DOM immediately
     applyThemeToDOM(newTheme);
 
+    // Persist to localStorage
     localStorage.setItem(DarkThemeKey, newTheme);
   }, [isDark]);
 
@@ -128,10 +143,14 @@ export const ThemeManagerProvider = (props) => {
           return;
       }
 
+      // Update state
       setIsDark(newIsDark);
       setThemeSetting(setting);
 
+      // Apply to DOM immediately
       applyThemeToDOM(themeToApply);
+
+      // Persist to localStorage
       localStorage.setItem(DarkThemeKey, setting);
     },
     [isDark]
