@@ -7,6 +7,11 @@ import Slide2 from "../../../assets/images/kanvas/gifs/catalog.gif";
 import Slide3 from "../../../assets/images/kanvas/gifs/rendered-design.webp";
 import FeaturesSectionWrapper from "./features-section.style";
 
+import { StaticImage } from "gatsby-plugin-image";
+
+const slide2Path = "../../../assets/images/kanvas/gifs/catalog.gif";
+const slide3Path = "../../../assets/images/kanvas/gifs/rendered-design.webp";
+
 const slides_list = [Slide1, Slide2, Slide3];
 
 const FeaturesSection = () => {
@@ -70,10 +75,10 @@ const FeaturesSection = () => {
                   <img src={Slide1} alt="Slide 1" />
                 </div>
                 <div>
-                  <img src={Slide2} alt="Slide 2" />
+                  <StaticImage src={slide2Path} alt="Slide 2" loading="lazy" />
                 </div>
                 <div>
-                  <img src={Slide3} alt="Slide 3" />
+                  <StaticImage src={slide3Path} alt="Slide 3" loading="lazy" />
                 </div>
               </Slider>
             </Col>
