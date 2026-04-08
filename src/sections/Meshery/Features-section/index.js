@@ -53,9 +53,7 @@ const FeaturesSection = () => {
             <span>Meshery</span> supports the most service meshes.
           </h1> */}
           <p>
-            No matter where you run your workloads, Meshery's Kanvas makes
-            Kubernetes and cloud infrastructure design intuitive and
-            collaborative.
+            No matter where you run your workloads, Meshery's Kanvas makes Kubernetes and cloud infrastructure design intuitive and collaborative.
           </p>
         </div>
         <div className="smp-section">
