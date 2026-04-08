@@ -64,9 +64,7 @@ const FeaturesSection = () => {
             <Col $xs={12} $xl={4} className="smp-section-data">
               <h2>The Visual Designer: Kanvas</h2>
               <p>
-                Drag, drop, and deploy your infrastructure with ease. Kanvas,
-                built on Meshery, simplifies Kubernetes and cloud management
-                through intuitive visual designer and operator.
+                Drag, drop, and deploy your infrastructure with ease. Kanvas, built on Meshery, simplifies Kubernetes and cloud management through intuitive visual designer and operator.
               </p>
             </Col>
             <Col $xs={12} $xl={8} className="smp-section-carousel">
