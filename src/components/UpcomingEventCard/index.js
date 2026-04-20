@@ -29,8 +29,8 @@ const UpcomingEvents = ({ data }) => {
                 <SwiperSlide key={item.id}>
                   <div className="blog-slider_item swiper-slide">
                     <div className="blog-slider_img">
-                      <Link to={`/community/events/${slugify(item.frontmatter.title)}`}>
-                        <Image {...item.frontmatter.thumbnail}  alt={item.frontmatter.title} />
+                      <Link to={`/community/events/${slugify(item.frontmatter.title)}`} aria-label={`View event: ${item.frontmatter.title}`}>
+                        <Image {...item.frontmatter.thumbnail}  alt={item.frontmatter.title}  width={480} height={270} />
                       </Link>
                     </div>
                     <div className="blog-slider_content">
