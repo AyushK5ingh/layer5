@@ -127,7 +127,7 @@ export const CardWrapper = styled.div`
     margin: 0 0 0.5rem 0;
     padding: 0;
 
-    white-space: normal !important;
+    white-space: normal;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
